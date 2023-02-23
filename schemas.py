@@ -5,7 +5,12 @@ class UserCreateInput(BaseModel):
     name: str
 
 
-class StandardOutput(BaseModel):
+class UserFavoriteAddInput(BaseModel):
+    user_id: int
+    symbol: str
+
+
+class StandardOutputInput(BaseModel):
     message: str
 
 

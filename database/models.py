@@ -13,11 +13,9 @@ class User(Base):
     favorites = relationship('Favorite', backref='user')
 
 
-
 class Favorite(Base):
     __tablename__ = 'favorite'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    symbol = Column(Integer)
+    symbol = Column(String)
     user_id = Column(Integer, ForeignKey('users.id'))
-
