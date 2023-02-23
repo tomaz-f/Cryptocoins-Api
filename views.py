@@ -37,3 +37,13 @@ async def user_favorite_add(favorite_add: UserFavoriteAddInput):
         return StandardOutputInput(message='Favorite added')
     except Exception as error:
         raise HTTPException(400, detail=str(error))
+
+
+@user_router.delete('/favorite/remove/{user_id}', response_model=StandardOutputInput,
+                    responses={400: {'model': ErrorOutput}})
+async def user_favorite_remove(user_id: int, symbol: str):
+    try:
+        await FavoriteService.remove_favorite(user_id=user_id, symbol=symbol)
+        return StandardOutputInput(message='Favorite removed')
+    except Exception as error:
+        raise HTTPException(400, detail=str(error))
