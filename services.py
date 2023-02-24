@@ -25,7 +25,7 @@ class UserService:
     async def get_by_id(user_id):
         async with async_session() as session:
             result = await session.execute(select(User).where(User.id == user_id))
-            return result.scalars().first()
+            return result.scalar().first()
 
 
 class FavoriteService:
