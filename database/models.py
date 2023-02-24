@@ -10,7 +10,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
-    favorites = relationship('Favorite', backref='user')
+    favorites = relationship('Favorite', backref='user', lazy='subquery')
 
 
 class Favorite(Base):
