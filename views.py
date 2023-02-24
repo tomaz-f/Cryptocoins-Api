@@ -1,9 +1,9 @@
 from typing import List
 from fastapi import APIRouter, HTTPException
-from services import UserService, FavoriteService
+from services import UserService, FavoriteService, AssetsService
 from schemas import (
     UserCreateInput, StandardOutputInput, ErrorOutput,
-    UserFavoriteAddInput, ListUserOutput
+    UserFavoriteAddInput, ListUserOutput, DaySummaryOutput
 )
 
 user_router = APIRouter(prefix='/user')
@@ -56,5 +56,14 @@ async def user_favorite_remove(user_id: int, symbol: str):
 async def user_list():
     try:
         return await UserService.list_user()
+    except Exception as error:
+        raise HTTPException(400, detail=str(error))
+
+
+@assets_router.get('/day-summary/{user_id}', response_model=List[DaySummaryOutput],
+                   responses={400: {'model': ErrorOutput}})
+async def day_summary(user_id: int):
+    try:
+        return await AssetsService.day_summary(symbol=symbol)
     except Exception as error:
         raise HTTPException(400, detail=str(error))

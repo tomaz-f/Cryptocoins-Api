@@ -9,6 +9,7 @@ uvicorn = "*"
 sqlalchemy = "*"
 asyncpg = "*"
 ipython = "*"
+aiohttp = "*"
 
 [dev-packages]
 autopep8 = "*"
