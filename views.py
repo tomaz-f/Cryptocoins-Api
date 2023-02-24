@@ -1,3 +1,4 @@
+from asyncio import gather
 from typing import List
 from fastapi import APIRouter, HTTPException
 from services import UserService, FavoriteService, AssetsService
@@ -64,6 +65,11 @@ async def user_list():
                    responses={400: {'model': ErrorOutput}})
 async def day_summary(user_id: int):
     try:
-        return await AssetsService.day_summary(symbol=symbol)
+        user = await UserService.get_by_id(user_id)
+        favorites_symbols = [favorite.symbol for favorite in user.favorites]
+        tasks = [AssetsService.get_day_summary(
+            symbol=symbol) for symbol in favorites_symbols]
+        return gather(*tasks)
+
     except Exception as error:
         raise HTTPException(400, detail=str(error))
