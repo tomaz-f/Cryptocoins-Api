@@ -25,7 +25,7 @@ class UserService:
     async def get_by_id(user_id):
         async with async_session() as session:
             result = await session.execute(select(User).where(User.id == user_id))
-            return result.scalar().first()
+            return result.scalar()
 
 
 class FavoriteService:
@@ -44,7 +44,7 @@ class FavoriteService:
             await session.commit()
 
 
-class AssetsService:
+class AssetService:
     async def day_summary(symbol: str):
         async with ClientSession() as session:
             yesterday = date.today() - timedelta(days=1)
@@ -52,7 +52,7 @@ class AssetsService:
             response = await session.get(url)
             data = await response.json()
             return {
-                'symbol': symbol,
                 'highest': data['highest'],
-                'lowest': data['lowest']
+                'lowest': data['lowest'],
+                'symbol': symbol,
             }
