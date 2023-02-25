@@ -11,7 +11,7 @@ class UserFavoriteAddInput(BaseModel):
     symbol: str
 
 
-class StandardOutputInput(BaseModel):
+class StandardOutput(BaseModel):
     message: str
 
 
@@ -28,7 +28,7 @@ class Favorite(BaseModel):
         orm_mode = True
 
 
-class ListUserOutput(BaseModel):
+class UserListOutput(BaseModel):
     id: int
     name: str
     favorites: List[Favorite]
@@ -36,8 +36,7 @@ class ListUserOutput(BaseModel):
     class Config:
         orm_mode = True
 
-
 class DaySummaryOutput(BaseModel):
-    highest = float
-    lowest = float
-    symbol = str
+    highest: float
+    lowest: float
+    symbol: str
