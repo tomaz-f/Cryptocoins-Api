@@ -61,7 +61,8 @@ async def user_list():
         raise HTTPException(400, detail=str(error))
 
 
-@assets_router.get('/day_summary/{user_id}', response_model=List[DaySummaryOutput], responses={400: {'model': ErrorOutput}})
+@assets_router.get('/day_summary/{user_id}', response_model=List[DaySummaryOutput],
+                   responses={400: {'model': ErrorOutput}})
 async def day_summary(user_id: int):
     try:
         user = await UserService.get_by_id(user_id)

@@ -1,6 +1,3 @@
-from datetime import datetime
-
-from aiohttp import ClientSession
 from asyncio import gather, run
 
 from database.init_db import create_database
