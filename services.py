@@ -54,5 +54,5 @@ class AssetService:
             return {
                 'highest': data['highest'],
                 'lowest': data['lowest'],
-                'symbol': symbol,
+                'symbol': symbol
             }
